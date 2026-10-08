@@ -4,6 +4,21 @@ A self-hosted personal and small-business finance app. Connect your banks, revie
 
 Built with Next.js 16, React 19, TypeScript, Tailwind CSS 4 and Supabase (Postgres, Auth, row-level security). Bank data comes from [Plaid](https://plaid.com); crypto balances from Coinbase.
 
+![Dashboard](docs/screenshots/dashboard.png)
+
+<table>
+  <tr>
+    <td><img src="docs/screenshots/reports.png" alt="Reports: money-flow Sankey"></td>
+    <td><img src="docs/screenshots/transactions.png" alt="Transaction review"></td>
+  </tr>
+  <tr>
+    <td><img src="docs/screenshots/calendar.png" alt="Bills calendar"></td>
+    <td><img src="docs/screenshots/recurring.png" alt="Recurring bills and subscriptions"></td>
+  </tr>
+</table>
+
+<sub>Screenshots use made-up demo data.</sub>
+
 ## Features
 
 - **Transaction review.** A fast ledger with a review queue, keyboard shortcuts, bulk edits (category, tags, reviewed, exclude), split transactions, transfers and full-text search.
