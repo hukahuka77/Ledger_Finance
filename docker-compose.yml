@@ -1,0 +1,32 @@
+# Self-hosting: the app plus a small sidecar that runs the daily background sync.
+#
+#   cp .env.example .env    # fill it in
+#   docker compose up -d --build
+#
+# Reach it at http://<host>:3000, or put it behind a reverse proxy / Tailscale.
+services:
+  app:
+    build:
+      context: .
+      args:
+        NEXT_PUBLIC_SUPABASE_URL: ${NEXT_PUBLIC_SUPABASE_URL}
+        NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY: ${NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY}
+    env_file: .env
+    ports:
+      - "3000:3000"
+    restart: unless-stopped
+
+  # Calls the sync endpoint once a day (the same job Vercel Cron runs).
+  # Needs SUPABASE_SERVICE_ROLE_KEY and CRON_SECRET in .env.
+  cron:
+    image: curlimages/curl:8.10.1
+    env_file: .env
+    depends_on: [app]
+    restart: unless-stopped
+    entrypoint: ["/bin/sh", "-c"]
+    command:
+      - |
+        while true; do
+          sleep 86400
+          curl -fsS -H "Authorization: Bearer $$CRON_SECRET" http://app:3000/api/cron/plaid-sync || true
+        done
