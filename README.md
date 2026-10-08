@@ -4,7 +4,7 @@ A self-hosted personal and small-business finance app. Connect your banks, revie
 
 Built with Next.js 16, React 19, TypeScript, Tailwind CSS 4 and Supabase (Postgres, Auth, row-level security). Bank data comes from [Plaid](https://plaid.com); crypto balances from Coinbase.
 
-![Dashboard](docs/screenshots/dashboard.png)
+![Ledger Finance demo: reviewing transactions, the money-flow report and the bills calendar](docs/screenshots/demo.gif)
 
 <table>
   <tr>
